@@ -1,4 +1,3 @@
-# commands/status.sh
 #!/bin/bash
 
 source "$LIB_DIR/common.sh"

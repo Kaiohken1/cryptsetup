@@ -24,7 +24,13 @@ install_environment() {
     fi
     
     info "Création du fichier de $ENV_SIZE"
-    dd if=/dev/zero of="$ENV_PATH" bs=1 count=0 seek="$ENV_SIZE" status=progress
+    local size_bytes
+    case "$ENV_SIZE" in
+        *G) size_bytes=$(( ${ENV_SIZE%G} * 1024 * 1024 * 1024 )) ;;
+        *M) size_bytes=$(( ${ENV_SIZE%M} * 1024 * 1024 )) ;;
+        *) size_bytes="$ENV_SIZE" ;;
+    esac
+    dd if=/dev/zero of="$ENV_PATH" bs=1 count=0 seek="$size_bytes" status=progress
     
     read -s -p "Passphrase pour le chiffrement: " passphrase
     echo

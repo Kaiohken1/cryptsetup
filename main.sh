@@ -5,7 +5,7 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 LIB_DIR="$SCRIPT_DIR/lib"
 COMMANDS_DIR="$SCRIPT_DIR/commands"
-CONFIG_DIR="$SCRIPT_DIR/config"
+CONFIG_DIR="$SCRIPT_DIR"
 
 source "$LIB_DIR/common.sh"
 source "$LIB_DIR/validation.sh"

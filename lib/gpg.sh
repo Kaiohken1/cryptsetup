@@ -46,7 +46,7 @@ generate_gpg_key() {
     
     export GNUPGHOME="$GPG_HOME"
     
-    local batch_file="/tmp/gpg_batch_$$"
+    local batch_file="$TEMP_DIR/${BATCH_FILE_PREFIX}_$$"
     TEMP_FILES="$TEMP_FILES $batch_file"
     
     read -p "Nom complet: " full_name
@@ -56,13 +56,13 @@ generate_gpg_key() {
     
     cat > "$batch_file" << EOF
 %echo Génération de la clé GPG
-Key-Type: RSA
-Key-Length: 4096
-Subkey-Type: RSA
-Subkey-Length: 4096
+Key-Type: $GPG_KEY_TYPE
+Key-Length: $GPG_KEY_LENGTH
+Subkey-Type: $GPG_SUBKEY_TYPE
+Subkey-Length: $GPG_SUBKEY_LENGTH
 Name-Real: $full_name
 Name-Email: $email
-Expire-Date: 2y
+Expire-Date: $GPG_EXPIRE_DATE
 Passphrase: $passphrase
 %commit
 %echo Clé GPG générée
